@@ -12,32 +12,10 @@ namespace GraphTraverse
     class Program
     {
      
-        static string mainGraph = ConfigurationManager.AppSettings["mainGraph"];
-        static string miniGraph = ConfigurationManager.AppSettings["testGraph"];
-        
-
+        //our program has only 1 task : to run our application
         static void Main(string[] args)
         {
-            List<Node> myGrapth = new List<Node>();
-
-            var gb = new GraphGenerator();
-            myGrapth = gb.GenerateFromFile(mainGraph);
-
-
-            var firstNode = myGrapth.First();
-
-            var sum = firstNode.GetMaxSum();
-            var list = firstNode.GetBestPath();
-
-            foreach (var i in list)
-            {
-                Console.WriteLine(i);
-            }
-
-            Console.WriteLine($"Max Val : {sum}");
-
-            Console.WriteLine("FINISH!");
-            Console.ReadKey();
+            Application.Run();
         }
     }
 }

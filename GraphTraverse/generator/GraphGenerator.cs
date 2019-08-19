@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace GraphTraverse
 {
-    public class GraphGenerator : IGraphGenerator
-    {
+    public class GraphGenerator : IGraphGeneratorFromFile
+    {   
         private List<Node> Graph { get; set; }
 
         public GraphGenerator()
@@ -19,10 +19,8 @@ namespace GraphTraverse
         /// <summary>
         /// Generate a directed graph 
         /// from input file
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns>List of nodes</returns>
-        public List<Node> GenerateFromFile(string path)
+        /// </summary> 
+        public List<Node> GenerateGraph(string path)
         {
             //keep track of parent nodes, know where to attach children
             List<Node> parentNodes = new List<Node>();

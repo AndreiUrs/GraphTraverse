@@ -4,6 +4,6 @@ namespace GraphTraverse
 {
     public interface IGraphGenerator
     {
-        List<Node> GenerateFromFile(string path);
+        List<Node> GenerateGraph(string path);
     }
 }
