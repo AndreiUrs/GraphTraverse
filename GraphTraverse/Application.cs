@@ -27,13 +27,15 @@ namespace GraphTraverse
 
                 var sum = firstNode.GetMaxSum();
                 var list = firstNode.GetBestPath();
+            
+               StringBuilder sb = new StringBuilder();
+               foreach (var i in list)
+               {
+                    sb.Append(i).Append(",");
+               }
 
-                foreach (var i in list)
-                {
-                    Console.WriteLine(i);
-                }
-
-                Console.WriteLine($"Max Val : {sum}");
+                Console.WriteLine($"Max sum : {sum}");
+                Console.WriteLine($"Path : {sb.ToString()}");
                 Console.ReadKey();
             }
 
