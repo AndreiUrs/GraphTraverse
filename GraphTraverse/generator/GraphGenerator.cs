@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace GraphTraverse
 {
-    public class GraphGenerator : IGraphGeneratorFromFile
+    public class GraphGenerator : IGraphGenerator
     {   
-        private List<Node> Graph { get; set; }
+        private List<Node> _graph { get; set; }
 
         public GraphGenerator()
         {
-            Graph = new List<Node>();
+            _graph = new List<Node>();
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace GraphTraverse
 
             //first node does not have a parent
             Node firstNode = new Node(Convert.ToInt32(allLines[0]));
-            Graph.Add(firstNode);
+            _graph.Add(firstNode);
             parentNodes.Add(firstNode);
             
             for (int i = 1; i < allLines.Length; i++)
@@ -43,7 +43,7 @@ namespace GraphTraverse
                 {
                     //create a new node,and add it to the right parent
                     Node node = new Node(Convert.ToInt32(lineValues[l]));
-                    Graph.Add(node);
+                    _graph.Add(node);
                     newNodes.Add(node);
 
                     //first and last node have one parent,otherwise 2
@@ -66,7 +66,7 @@ namespace GraphTraverse
                 parentNodes = newNodes;
             }
 
-            return Graph;
+            return _graph;
         }
     }
 }

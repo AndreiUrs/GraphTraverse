@@ -17,11 +17,10 @@ namespace GraphTraverse
         public int Value { get; set; }
         public List<Node> Children { get; set; }
 
-        
-        private int MaxValue { get; set; } = int.MinValue;
-        private Node BestChild { get; set; } = null;
-        private bool IsValid { get; set; } = true;
-        private bool IsCalculated { get; set; } = false;
+        private int _maxValue { get; set; } = int.MinValue;
+        private Node _bestChild { get; set; } = null;
+        private bool _isValid { get; set; } = true;
+        private bool _isCalculated { get; set; } = false;
 
         public Node(int val)
         {
@@ -36,18 +35,17 @@ namespace GraphTraverse
         public int GetMaxSum()
         {
             FindMaxValue();
-            return MaxValue;
+            return _maxValue;
         }
 
         /// <summary>
         /// Return a list containing the values of best children
         /// </summary>
-        /// <returns></returns>
         public List<int> GetBestPath()
         {
             List<int> list = new List<int>();
             list.Add(Value);
-            if (BestChild != null) list.AddRange(BestChild.GetBestPath());
+            if (_bestChild != null) list.AddRange(_bestChild.GetBestPath());
 
             return list;
         }
@@ -59,10 +57,10 @@ namespace GraphTraverse
         {
             //base case of recursion 
             //if calculated, job done
-            if (IsCalculated) return;
+            if (_isCalculated) return;
 
             //this is leaf node in my graph
-            if (Children.Count == 0) { MaxValue = Value; }
+            if (Children.Count == 0) { _maxValue = Value; }
             else
             {
                 //iterate over all children and calculate the max value
@@ -77,32 +75,32 @@ namespace GraphTraverse
                     if (c.Value % 2 != Value % 2)
                     {
                         //do not calculate best child if is invalid(optimization)
-                        if (c.IsValid)
+                        if (c._isValid)
                         {
                             //pick the first child
-                            if (BestChild == null)
+                            if (_bestChild == null)
                             {
-                                BestChild = c;
+                                _bestChild = c;
                             }
                             //compare with best child
-                            else if (c.MaxValue > BestChild.MaxValue)
+                            else if (c._maxValue > _bestChild._maxValue)
                             {
-                                BestChild = c;
+                                _bestChild = c;
                             }
                         }
                     }
                 }
                 //if children have same parity as parent, no best child (case 1)
                 //if children of current node are invalid (case 2)
-                if (BestChild == null)
+                if (_bestChild == null)
                 {
-                    IsValid = false;
+                    _isValid = false;
                 }
                 else
                 {
-                    MaxValue = BestChild.MaxValue + Value;
+                    _maxValue = _bestChild._maxValue + Value;
                 }
-                IsCalculated = true;
+                _isCalculated = true;
             }
         }
         
